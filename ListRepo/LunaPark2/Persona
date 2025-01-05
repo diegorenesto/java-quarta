@@ -1,0 +1,14 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class Persona {
+    public int numeroBiglietto;
+    public LocalDateTime momentoEvento;
+    public Giostre giostreUsate;
+
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return "Biglietto " + numeroBiglietto + ", Orario di entrata" + momentoEvento.format(formatter);
+    }
+}

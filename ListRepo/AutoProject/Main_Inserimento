@@ -1,0 +1,49 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner tastiera = new Scanner(System.in);
+        final int MAXAUTO = 3;
+        ArrayList<Automobile> concessionaria = new ArrayList<>(MAXAUTO);
+        int cont = 0;
+
+        while (cont < MAXAUTO) {
+            System.out.println("Inserisci gli attributi dell'auto: ");
+            Automobile auto = inserimento(tastiera);
+            if (!autoDoppia(concessionaria, auto)) {
+                concessionaria.add(auto);
+                cont++;
+            } else
+                System.out.println("Auto gia' presente nella concessionaria");
+        }
+
+        System.out.println("Concessionaria: ");
+        concessionaria.forEach(a -> System.out.println(a.toString()));
+
+    }
+
+
+    public static Automobile inserimento(Scanner tastiera) {
+        Automobile auto = new Automobile();
+        System.out.println("Inserisci marca");
+        auto.marca = tastiera.nextLine();
+        System.out.println("Inserisci modello");
+        auto.modello = tastiera.nextLine();
+        System.out.println("Inserisci data di produzione");
+        auto.produzione = LocalDate.parse(tastiera.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        System.out.println("Inserisci cilindrata");
+        auto.cilindrata = Integer.parseInt(tastiera.nextLine());
+        return auto;
+    }
+
+    public static boolean autoDoppia(ArrayList<Automobile> concessionaria, Automobile auto) {
+        for (Automobile nuovaAuto : concessionaria) {
+            if (auto.marca.equals(nuovaAuto.marca) && auto.modello.equals(nuovaAuto.modello))
+                return true;
+        }
+        return false;
+    }
+}

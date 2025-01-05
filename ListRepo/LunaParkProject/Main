@@ -1,0 +1,113 @@
+import lunaParkPackage.Giostre;
+import lunaParkPackage.Persona;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import static utility.Tools.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner tastiera = new Scanner(System.in);
+        boolean uscita = false;
+        final int MAXPERSONE = 3;
+        ArrayList<Persona> lunaPark = new ArrayList<>(MAXPERSONE);
+        int cont = 0;
+
+        do {
+            String[] opzioni = {"---LUNA PARK---", "1. Ingresso", "2. Uscita", "3. Visualizza giostre provate", "4. Vai su una giostra", "5. Fine"};
+            int scelta = Menu(opzioni, tastiera);
+
+            switch (scelta) {
+                case 1 -> {
+                    System.out.println("Ingresso");
+                    if (cont < MAXPERSONE) {
+                        Persona persona = new Persona();
+                        System.out.print("Inserisci il nome: ");
+                        String nome = tastiera.nextLine();
+                        persona.nome = nome;
+                        persona.accesso = LocalDate.now();
+                        lunaPark.add(persona);
+
+                        System.out.println("Benvenuto nel luna park");
+                        System.out.println(persona.toString());
+                        cont++;
+                    } else {
+                        System.out.println("Il luna park è pieno");
+                    }
+                }
+
+                case 2 -> {
+                    System.out.println("Uscita");
+                    System.out.print("Inserisci il numero del biglietto per uscire: ");
+                    int biglietto = Integer.parseInt(tastiera.nextLine());
+
+                    boolean personaTrovata = false;
+                    for (int i = 0; i < lunaPark.size(); i++) {
+                        if (lunaPark.get(i).biglietto == biglietto) {
+                            System.out.println("Arrivederci");
+                            lunaPark.remove(i);
+                            cont--;
+                            personaTrovata = true;
+                            break;
+                        }
+                    }
+                    if (!personaTrovata)
+                        System.out.println("Nessuna persona trovata con il biglietto: " + biglietto);
+
+                }
+
+                case 3 -> {
+                    System.out.println("Visualizza giostre provate");
+                    lunaPark.forEach(p -> System.out.println(p.toString()));
+
+                }
+
+                case 4 -> {
+                    System.out.print("Inserisci il numero del biglietto per andare su una giostra: ");
+                    int biglietto = Integer.parseInt(tastiera.nextLine());
+                    Persona personaScelta = null;
+
+                    for (Persona persona : lunaPark) {
+                        if (persona.biglietto == biglietto) {
+                            personaScelta = persona;
+                            break;
+                        }
+                    }
+
+                    if (personaScelta != null) {
+                        String[] giostreOpzioni = {"---GIOSTRE---", "Ruota Panoramica", "Autoscontro", "Ottovolante", "Tagada"};
+                        int sceltaGiostra = Menu(giostreOpzioni, tastiera);
+                        Giostre giostraSelezionata = switch (sceltaGiostra) {
+                            case 1 -> Giostre.ruotaPanoramica;
+                            case 2 -> Giostre.autoscontro;
+                            case 3 -> Giostre.ottovolante;
+                            case 4 -> Giostre.tagada;
+                            default -> null;
+                        };
+
+                        if (giostraSelezionata != null) {
+                            personaScelta.aggiungiGiostra(giostraSelezionata);
+                            System.out.println(personaScelta.nome + " è andato sulla giostra: " + giostraSelezionata);
+                        } else
+                            System.out.println("Giostra non valida");
+
+
+                    } else
+                        System.out.println("Nessuna persona trovata con il biglietto: " + biglietto);
+
+                }
+
+                case 5 -> {
+                    System.out.println("Fine");
+                    uscita = true;
+                }
+
+                default -> System.out.println("Inserisci una scelta valida");
+            }
+
+        } while (!uscita);
+
+    }
+}
