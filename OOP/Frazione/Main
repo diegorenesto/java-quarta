@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner tastiera = new Scanner(System.in);
+        try {
+            System.out.println("Inserisci la prima frazione: ");
+            Frazione f1 = Frazione.creaFrazione(tastiera);
+            System.out.println("Inserisci la seconda frazione: ");
+            Frazione f2 = Frazione.creaFrazione(tastiera);
+
+            Frazione somma = f1.sommaFrazioni(f2);
+            System.out.print("Somma delle frazioni: ");
+            somma.visualizzaRisultato();
+
+            double sommaDecimale = f1.sommaFrazioni2(f2);
+            System.out.println("Somma delle frazioni (decimale): " + sommaDecimale);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}

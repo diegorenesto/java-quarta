@@ -1,0 +1,20 @@
+public class Segmento {
+    private Punto p1;
+    private Punto p2;
+
+    public Segmento(Punto p1, Punto p2) {
+        this.p1 = p1;
+        this.p2 = p2;
+    }
+
+    public double lunghezza() {
+        int deltaX = p2.getX() - p1.getX();
+        int deltaY = p2.getY() - p1.getY();
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    }
+
+    @Override
+    public String toString() {
+        return "Segmento tra " + p1.toString() + " e " + p2.toString();
+    }
+}

@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner tastiera = new Scanner(System.in);
+
+        System.out.println("Inserisci la prima coordinata del punto: ");
+        int x = tastiera.nextInt();
+        System.out.println("Inserisci la seconda coordinata del punto: ");
+        int y = tastiera.nextInt();
+
+        Punto p = new Punto();
+        p.setX(x);
+        p.setY(y);
+
+        System.out.println("Ecco le coordinate del primo punto: " + p.toString());
+        System.out.println(p.determinaQuadrante());
+
+        System.out.println("\nInserisci le coordinate di un nuovo punto: ");
+        Punto p2 = new Punto();
+        p2.Punto();
+
+        System.out.println("Coordinate del secondo punto: " + p2.toString());
+
+        Segmento s = new Segmento(p, p2);
+        System.out.println("\nCreazione del segmento tra il primo e il secondo punto: ");
+        System.out.println(s.toString());
+        System.out.println("La lunghezza del segmento è: " + s.lunghezza() + " unità\n");
+
+        // rettangolo
+        try {
+            System.out.println("Inserisci le coordinate dell'angolo in alto a sinistra del rettangolo (x, y):");
+            try {
+                int xRett = tastiera.nextInt();
+                int yRett = tastiera.nextInt();
+                if (xRett == yRett)
+                    throw new Exception("Hai inserito un quadrato");
+                Punto angoloInAltoSinistra = new Punto();
+                angoloInAltoSinistra.setX(xRett);
+                angoloInAltoSinistra.setY(yRett);
+                System.out.println("Inserisci la base del rettangolo: ");
+                int base = tastiera.nextInt();
+                System.out.println("Inserisci l'altezza del rettangolo: ");
+                int altezza = tastiera.nextInt();
+
+                Rettangolo rettangolo = new Rettangolo(angoloInAltoSinistra, base, altezza);
+
+                System.out.println("\nDettagli del rettangolo creato: ");
+                System.out.println(rettangolo.toString());
+
+                double diagonale = rettangolo.calcolaDiagonaleRettangolo(xRett, yRett);
+                System.out.println("La diagonale del rettangolo e': " + diagonale);
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        } catch (Exception e) {
+            // Se il rettangolo è fuori dal primo quadrante, viene lanciata un'eccezione
+            System.out.println(e.getMessage());
+        }
+    }
+}

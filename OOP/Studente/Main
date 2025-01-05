@@ -1,0 +1,26 @@
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Studente st = new Studente("Giacomo", "Redi", 8, 19);
+            Studente st1 = new Studente("Francesco", "Marchetto", 8, 19);
+            // System.out.println(st);
+            // System.out.println(st1);  // stampa due indirizzi di memoria
+            if (st.equals(st1)) {
+                System.out.println("Sono uguali");
+                ;
+            } else
+                System.out.println("Non sono uguali");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Qui il programma continua...");
+        int numeroMagico = 88;
+        try {
+            if (numeroMagico < 100) {
+                throw new Exception("Numero minore di 100");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}

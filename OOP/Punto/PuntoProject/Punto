@@ -1,0 +1,59 @@
+
+import java.util.Scanner;
+
+public class Punto {
+    // metodo set e get del costruttore
+    // metodo determina punto nello spazio
+    // metodo per determinare in che quadrante si trova
+
+    Scanner tastiera = new Scanner(System.in);
+    private int x;
+    private int y;
+
+    public void Punto() {
+        this.x = tastiera.nextInt();
+        this.y = tastiera.nextInt();
+    }
+
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int a) {
+        this.x = a;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int b) {
+        this.y = b;
+    }
+
+    public String determinaQuadrante() {
+        if (x > 0 && y > 0) {
+            return "Il punto si trova nel primo quadrante";
+        } else if (x < 0 && y > 0) {
+            return "Il punto si trova nel secondo quadrante";
+        } else if (x < 0 && y < 0) {
+            return "Il punto si trova nel terzo quadrante";
+        } else if (x > 0 && y < 0) {
+            return "Il punto si trova nel quarto quadrante";
+        } else {
+            return "Il punto si trova sull'origine";
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return String.format("X: " + getX()) + "; Y: " + getY();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+}

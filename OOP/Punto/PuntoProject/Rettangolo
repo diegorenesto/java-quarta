@@ -1,0 +1,50 @@
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Rettangolo {
+    private Punto angoloInAltoSinistra;
+    private int base;
+    private int altezza;
+    private List<Segmento> segmenti;
+
+    public Rettangolo(Punto angoloInAltoSinistra, int base, int altezza) {
+        this.angoloInAltoSinistra = angoloInAltoSinistra;
+        this.base = base;
+        this.altezza = altezza;
+        this.segmenti = new ArrayList<>();
+
+        Punto angoloInBassoSinistra = new Punto();
+        angoloInBassoSinistra.setX(angoloInAltoSinistra.getX());
+        angoloInBassoSinistra.setY(angoloInAltoSinistra.getY() - altezza);
+
+        Punto angoloInAltoDestra = new Punto();
+        angoloInAltoDestra.setX(angoloInAltoSinistra.getX() + base);
+        angoloInAltoDestra.setY(angoloInAltoSinistra.getY());
+
+        Punto angoloInBassoDestra = new Punto();
+        angoloInBassoDestra.setX(angoloInAltoSinistra.getX() + base);
+        angoloInBassoDestra.setY(angoloInAltoSinistra.getY() - altezza);
+
+        // segmenti
+        this.segmenti.add(new Segmento(angoloInAltoSinistra, angoloInAltoDestra));
+        this.segmenti.add(new Segmento(angoloInAltoDestra, angoloInBassoDestra));
+        this.segmenti.add(new Segmento(angoloInBassoDestra, angoloInBassoSinistra));
+        this.segmenti.add(new Segmento(angoloInBassoSinistra, angoloInAltoSinistra));
+
+    }
+
+    public double calcolaDiagonaleRettangolo(double lunghezza, double larghezza) {
+        double diagonale = Math.sqrt(Math.pow(lunghezza, 2) + Math.pow(larghezza, 2));
+        return diagonale;
+    }
+
+    public List<Segmento> getSegmenti() {
+        return segmenti;
+    }
+
+    @Override
+    public String toString() {
+        return "Rettangolo con i seguenti segmenti: \n" + getSegmenti() + "\n";
+    }
+}
