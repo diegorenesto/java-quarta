@@ -1,0 +1,130 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.SequencedCollection;
+
+import static utility.Tools.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner tastiera = new Scanner(System.in);
+        boolean uscita = false;
+        int nLibri = 0;
+        final int MAXLIBRI = 3;
+        ArrayList<Libro> mensola = new ArrayList<>();
+        do {
+            String[] opzioni = {"---LIBRERIA---", "1. Inserimento", "2. Visualizzazione", "3. Modifica numero di pagine", "4. Fine"};
+            int scelta = Menu(opzioni, tastiera);
+
+            switch (scelta) {
+                case 1 -> {
+                    try {
+                        System.out.println("Inserimento");
+                        if (nLibri < MAXLIBRI) {
+                            nLibri++;
+                            Libro l = metodoCreazioneLibro(tastiera);
+                            if (!libroDoppio(mensola, l))
+                                mensola.add(l);
+                            System.out.println("Libro aggiunto alla mensola");
+                        } else {
+                            System.out.println("Mensola piena");
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                }
+
+                case 2 -> {
+                    mensola.forEach(l -> System.out.println(l.toString()));
+                }
+
+                case 3 -> {
+                    System.out.println("Modifica numero di pagine");
+                    metodoCambiaPagine(mensola, tastiera);
+
+                }
+
+                case 4 -> {
+                    System.out.println("Fine");
+                    uscita = true;
+                }
+
+                default -> System.out.println("Inserisci una scelta valida!");
+            }
+        } while (!uscita);
+    }
+
+    public static Libro metodoCreazioneLibro(Scanner tastiera) {
+        Libro nuovoLibro = new Libro();
+        System.out.println("Inserisci l'autore: ");
+        nuovoLibro.autore = tastiera.nextLine();
+        System.out.println("Inserisci il titolo: ");
+        nuovoLibro.titolo = tastiera.nextLine();
+        System.out.println("Inserisci la data di pubblicazione: ");
+        nuovoLibro.dataDiPubblicazione = LocalDate.parse(tastiera.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        System.out.println("Inserisci il tipo: ");
+        String[] opzioni = {"---TIPO---", "Romanzo", "Manuale", "Horror"};
+        int scelta = Menu(opzioni, tastiera);
+        switch (scelta) {
+            case 1 -> nuovoLibro.tipo = Genere.ROMANZO;
+            case 2 -> nuovoLibro.tipo = Genere.MANUALE;
+            case 3 -> nuovoLibro.tipo = Genere.HORROR;
+        }
+        System.out.println("Inserisci il numero di pagine: ");
+        nuovoLibro.numeroPagine = Integer.parseInt(tastiera.nextLine());
+        return nuovoLibro;
+    }
+
+    public static boolean libroDoppio(ArrayList<Libro> mensola, Libro l) {
+        for (Libro nuovoL : mensola) {
+            if (l.autore.equals(nuovoL.autore) && l.titolo.equals(nuovoL.autore))
+                return true;
+        }
+        return false;
+    }
+
+    public static void metodoCambiaPagine(ArrayList<Libro> mensola, Scanner tastiera) {
+        System.out.println("Inserisci il titolo del libro da modificare: ");
+        String titolo = tastiera.nextLine();
+        System.out.println("Inserisci l'autore del libro da modificare: ");
+        String autore = tastiera.nextLine();
+
+        for (Libro libro : mensola) {
+            if (libro.titolo.equals(titolo) && libro.autore.equals(autore)) {
+                System.out.println("Inserisci il nuovo numero di pagine: ");
+                int nuovoNumeroPagine = Integer.parseInt(tastiera.nextLine());
+                libro.numeroPagine = nuovoNumeroPagine;
+            }
+        }
+
+        System.out.println("Libro non trovato");
+    }
+
+}
+
+class Libro {
+    public String autore;
+    public String titolo;
+    public int numeroPagine;
+    public double costoPagine = 0.05;
+    public Genere tipo;
+    public LocalDate dataDiPubblicazione;
+
+    public String toString() {
+        return String.format("Autore: %s, Titolo: %s, Tipo: %s, Data di pubblicazione: %s, Numero Pagine: %d, Prezzo: %f",
+                autore, titolo, tipo, dataDiPubblicazione, numeroPagine, numeroPagine * costoPagine);
+    }
+
+
+}
+
+
+enum Genere {
+    ROMANZO,
+    MANUALE,
+    HORROR
+}
+

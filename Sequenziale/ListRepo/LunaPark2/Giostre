@@ -1,0 +1,6 @@
+public enum Giostre {
+    RUOTAPANORAMICA,
+    AUTOSCONTRO,
+    OTTOVOLANTE,
+    TAGADA;
+}

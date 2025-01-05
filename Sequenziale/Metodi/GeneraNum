@@ -1,0 +1,23 @@
+public static void generaNumeri(int[] vettore) {
+        Random numeroRandom = new Random();
+        int numero; // numero da generare e inserire nel vettore
+        int cont = 0; // verifica quanti numeri sono presenti senza ripetizioni
+
+        do {
+            numero = numeroRandom.nextInt(0, vettore.length) + 1;
+            boolean presente = false; // true se numero presente, false se no
+
+            for (int i = 0; i < cont; i++) { // Controlla se il numero è già presente
+                if (vettore[i] == numero) {
+                    presente = true;
+                }
+            }
+
+            if (!presente) { // se non è presente lo aggiungo all'array
+                vettore[cont] = numero;
+                cont++;
+            }
+        } while (cont < vettore.length);
+    }
+
+// genera numeri unici

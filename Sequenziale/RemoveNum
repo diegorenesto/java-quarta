@@ -1,0 +1,102 @@
+
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        Scanner tastiera = new Scanner(System.in);
+        Random genera = new Random();
+
+        System.out.println("Inserisci la dimensione del vettore: ");
+        int lunghezza = tastiera.nextInt();
+
+        int[] vettore = new int[lunghezza];
+        for (int i = 0; i < lunghezza; i++) {
+            vettore[i] = genera.nextInt(0, 10) + 1;
+        }
+        System.out.println(Arrays.toString(vettore));
+
+        System.out.println("Che numero vuoi eliminare: ");
+        int numero = tastiera.nextInt();
+
+        int[] vettore2 = removeNum(vettore, numero);
+        if (vettore2 != null) {
+            System.out.println(Arrays.toString(vettore2));
+        }
+
+        /* if (test(vettore2, numero) != false) {
+            System.out.printf("Il metodo funziona correttamente");
+        } else {
+            System.out.println("Controlla bene!");
+        }
+
+         */
+
+        try {
+            if (test(vettore, numero) != false) {
+                Thread.sleep(2000);
+                exceptionMethod(vettore2, numero);
+            }
+        } catch (Exception e) {
+            Thread.sleep(2000);
+            System.out.println(e.getMessage());
+        }
+
+
+    }
+
+    public static int[] removeNum(int[] vet, int num) {
+        int cont = 0;
+
+        for (int i = 0; i < vet.length; i++) {
+            if (vet[i] != num) {
+                cont++;
+            }
+
+        }
+        if (cont > 0) {
+            int[] vet2 = new int[cont];
+            cont = 0;
+            for (int i = 0; i < vet.length; i++) {
+                if (vet[i] != num) {
+                    vet2[cont++] = vet[i];
+                }
+            }
+            return vet2;
+        }
+        return null;
+    }
+
+    public static boolean test(int[] vet, int num) {
+        boolean funziona = true;
+        int cont = 0;
+        for (int i = 0; i < vet.length; i++) {
+            if (vet[i] == num) {
+                cont++;
+            }
+        }
+        if (cont > 0) {
+            funziona = false;
+        }
+
+        return funziona;
+    }
+
+
+    public static void exceptionMethod(int[] vet, int num) throws Exception {
+        int cont = 0;
+        for (int i = 0; i < vet.length; i++) {
+            if (vet[i] == num) {
+                cont++;
+
+                if (cont == 0) {
+                    System.out.println("Il metodo funziona correttamente");
+                }
+            } else {
+                throw new Exception("Eccezione, il numero non e' presente!");
+            }
+        }
+
+    }
+}

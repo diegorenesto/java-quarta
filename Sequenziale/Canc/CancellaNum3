@@ -1,0 +1,94 @@
+
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Random;
+
+public class CancellaNum2 {
+    public static void main(String[] args) {
+        Scanner tastiera = new Scanner(System.in);
+        Random numeroRandom = new Random();
+        int lunghezza;
+        System.out.println("Inserisci la lunghezza del vettore: ");
+        lunghezza = tastiera.nextInt();
+        int[] vettore = new int[lunghezza];
+
+        for (int i = 0; i < lunghezza; i++) {
+            vettore[i] = numeroRandom.nextInt(0, 100) + 1;
+            System.out.println(vettore[i]);
+        }
+
+        cancellaAggiungiNum(vettore, lunghezza);
+
+
+        selectionSort(vettore);
+        System.out.println("Vettore ordinato");
+
+        for (int i : vettore) {
+            System.out.print(i + "\n");
+        }
+
+
+    }
+
+    public static void cancellaAggiungiNum(int[] vettore, int lunghezza) {
+        Scanner tastiera = new Scanner(System.in);
+        boolean presente = false;
+        int numDaEliminare;
+        System.out.println("Che numero vuoi eliminare: ");
+        numDaEliminare = tastiera.nextInt();
+        for (int i = 0; i < lunghezza; i++) {
+            if (numDaEliminare == vettore[i]) {
+                presente = true;
+                break;
+            }
+        }
+        if (presente) {
+            int[] nuovoVettore = new int[vettore.length - 1];
+            int j = 0;
+
+            for (int i : vettore) {
+                if (i != numDaEliminare) {
+                    nuovoVettore[j] = i;
+                    j++;
+                }
+            }
+
+            vettore = nuovoVettore;
+
+            System.out.println("Vettore dopo la rimozione: " + Arrays.toString(vettore));
+
+            Random numeroRandom = new Random();
+            int numeroDaAggiungere = numeroRandom.nextInt(0, 100) + 1;
+            int[] vettore3 = new int[vettore.length + 1];
+
+            for (int i = 0; i < vettore.length; i++) {
+                vettore3[i] = vettore[i];
+            }
+
+            vettore3[vettore3.length - 1] = numeroDaAggiungere;
+            System.out.println("Nuovo vettore: " + Arrays.toString(vettore3));
+
+        } else {
+
+            System.out.println("Numero non trovato nel vettore");
+            System.out.println("Vettore: " + Arrays.toString(vettore));
+
+        }
+    }
+
+    public static void selectionSort(int[] vet) {
+        for (int i = 0; i < vet.length - 1; i++) {
+            int index = i;
+            for (int j = i + 1; j < vet.length; j++) {
+                if (vet[j] < vet[index]) {
+                    index = j;//searching for lowest index
+                }
+            }
+            int num = vet[index];
+            vet[index] = vet[i];
+            vet[i] = num;
+
+        }
+    }
+
+}

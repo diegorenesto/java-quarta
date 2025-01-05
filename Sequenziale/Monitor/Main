@@ -1,0 +1,65 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
+public class Main {
+    public static void main(String[] args) {
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        list.add(4);
+        list.add(8);
+        list.add(9);
+        list.add(10);
+        list.forEach(System.out::println);
+
+        System.out.println();
+
+        Collections.reverse(list);
+        list.forEach(System.out::println);
+
+
+        System.out.println("Last index of 10: " + list.lastIndexOf(10));    // ultimo indice della variabile passata come oggetto
+
+        boolean found = list.contains(7);
+        if (found) {
+            System.out.println("List contains the number 7");
+        } else {
+            System.out.println("The list contains: " + list);
+        }
+
+        list.set(0, 9);  // set sostituisce all indice index il numero num
+        list.forEach(System.out::println);
+
+
+        ArrayList<Integer> list2 = new ArrayList<>();
+        System.out.println("The list is the same as the second? " + list.equals(list2)); // mette a confronto le due stringhe
+    }
+}
+
+        System.out.println("---------------------");
+        ArrayList<Monitor> info1 = new ArrayList<>();
+        Monitor m1 = new Monitor();
+        m1.marca = "marca1";
+        m1.modello = "modello1";
+        m1.size = 21;
+
+        info1.add(m1);
+
+        Monitor m2 = new Monitor();
+        m2.marca = "marca2";
+        m2.modello = "modello2";
+        m2.size = 22;
+
+        info1.add(m2);
+
+        Monitor m3 = new Monitor();
+        m3.marca = "marca3";
+        m3.modello = "modello3";
+        m3.size = 23;
+
+        info1.add(m3);
+
+    }
+
+}

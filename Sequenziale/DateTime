@@ -1,0 +1,18 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+public class DateTime {
+    public static void main(String[] args) {
+        LocalTime currentTime = LocalTime.now();
+        System.out.println(currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+
+        LocalDate today = LocalDate.now();
+        System.out.println(today);
+        System.out.println(today.format(DateTimeFormatter.ofPattern("dd")));
+        System.out.println(today.format(DateTimeFormatter.ofPattern("MM")));
+        System.out.println(today.format(DateTimeFormatter.ofPattern("yyyy")));
+
+//continua...
+    }
+}

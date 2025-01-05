@@ -1,0 +1,17 @@
+import java.time.LocalDate;
+
+public class Automobile {
+
+    public String marca;
+    public String modello;
+    public LocalDate dataDiProduzione;
+    public int cilindrata;
+
+    @Override
+    public String toString() {
+
+
+        return String.format("Marca: %s, Modello: %s, Data di produzione: %s, cilindrata: %d", marca, modello, dataDiProduzione, cilindrata);
+
+    }
+}

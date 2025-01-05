@@ -1,0 +1,37 @@
+import static utility.Tools.*;
+
+
+import java.util.Scanner;
+import java.util.Random;
+
+
+public class GeneraRandom {
+    public static void main(String[] args) {
+        Scanner tastiera = new Scanner(System.in);
+        Random nRandom = new Random();
+        final int MAXNUMERI = 100;
+        int[] nGenerati = new int[MAXNUMERI];
+        String[] opzioni = {"Menu", "1.Genera Random", "2.visualizzazione", "3.Fine"};
+        boolean esci = true;
+        do {
+            switch (Menu(opzioni, tastiera)) {
+                case 1:
+                    System.out.println("Generazione");
+                    for (int i = 0; i < MAXNUMERI; i++) {
+                        nGenerati[i] = nRandom.nextInt(0, MAXNUMERI) + 1;
+                    }
+                    break;
+                case 2:
+                    System.out.println("Visualizzazione");
+                    for (int i = 0; i < nGenerati.length; i++) {
+                        System.out.println(nGenerati[i]);
+                    }
+                    break;
+                case 3:
+                    System.out.println("Fine");
+                    esci = false;
+                    break;
+            }
+        } while (esci);
+    }
+}

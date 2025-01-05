@@ -1,0 +1,85 @@
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import static utility.Tools.*;
+
+public class MainLuna {
+    public static void main(String[] args) {
+        boolean esci = false;
+        int nBiglietto = 0;
+        int nPersone = 0;
+        Scanner tastiera = new Scanner(System.in);
+        final int MAXPERSONE = 10;
+        ArrayList<Biglietto> lista = new ArrayList<>();
+        String[] opzioni = {"GESTORE LUNAPARK", "Registra entrata", "Registra uscita", "Nuova giostra", "Esci"};
+        do {
+
+            switch (Menu(opzioni, tastiera)) {
+                case 1 -> {
+                    try {
+                        if (nPersone > MAXPERSONE)
+                            throw new Exception();
+                        nPersone++;
+                        Biglietto b = metodoCreazioneBiglietto(++nBiglietto);
+                        lista.add(b);
+                        System.out.println("Numero assegnato al cliente: " + nBiglietto);
+                    } catch (Exception e) {
+                        System.out.println("Luna park pieno");
+                    }
+
+                }
+                case 2 -> {  // nuova giostra
+                    System.out.println("Numero biglietto cliente: ");
+                    int numeroB = Integer.parseInt(tastiera.nextLine());
+                    Biglietto p = metodoNuovaGiostra(numeroB, tastiera);
+                    lista.add(p);
+
+                }
+                case 3 -> {
+
+                }
+                case 4 -> esci = true;
+            }
+
+        } while (!esci);
+    }
+
+    public static Biglietto metodoCreazioneBiglietto(int nBiglietto) {
+        Biglietto cliente = new Biglietto();
+        cliente.numeroBiglietto = nBiglietto;
+        cliente.momentoEvento = LocalDateTime.now();  // momento dell ingresso
+        return cliente;
+    }
+
+
+    public static Biglietto metodoNuovaGiostra(int nBiglietto, Scanner tastiera) {
+        Biglietto cliente = new Biglietto();
+        boolean esci;
+        do {
+            try {
+                System.out.println("Quale giostra vuoi provare? [ruota_panoramica, autoscontro, ottovolante, tagada]");
+                cliente.giostreUsate = Giostre.valueOf(tastiera.nextLine().toUpperCase());
+                esci = true;
+            } catch (Exception e) {
+                System.out.println("...");
+                esci = false;
+            }
+        } while (!esci);
+
+
+        cliente.numeroBiglietto = nBiglietto;
+        cliente.momentoEvento = LocalDateTime.now();  // momento della nuova giostra
+        return cliente;
+    }
+
+
+    public static boolean findIndex(ArrayList<Biglietto> gestore, int nBiglietto) {
+        for (Biglietto persona : gestore) {
+            if (persona.numeroBiglietto == nBiglietto) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

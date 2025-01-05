@@ -1,0 +1,9 @@
+package lunaParkPackage;
+
+public enum Giostre {
+
+    ruotaPanoramica,
+    autoscontro,
+    ottovolante,
+    tagada;
+}

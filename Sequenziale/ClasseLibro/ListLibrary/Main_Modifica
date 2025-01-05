@@ -1,0 +1,132 @@
+import mensola.Libro;
+
+import static frontScreen.FrontEnd.*;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import static utility.Tools.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner tastiera = new Scanner(System.in);
+        boolean uscita = false;
+        final int MAXLIBRI = 3;
+        ArrayList<Libro> mensola = new ArrayList<Libro>(MAXLIBRI);
+        int cont = 0;
+
+        do {
+            String[] opzioni = {"---MENSOLA---", "1. Inserimento", "2. Visualizzazione", "3. Cancellazione per Titolo", "4. Visualizzazione per Autore", "5. Visualizzazione per Titolo", "6. Visualizzazione per Data", "7. Modifica numero di pagine", "8. Visualizzazione dei prezzi", "9. Fine"};
+            int scelta = Menu(opzioni, tastiera);
+
+            switch (scelta) {
+                case 1 -> {
+                    System.out.println("Inserimento");
+                    if (cont < MAXLIBRI) {  // controllo che ci sia spazio nella mensola
+                        Libro nuovoLibro = LeggiLibro(tastiera);
+
+                        try {
+                            exceptionMethod(mensola, nuovoLibro);  // metodo che solleva un eccezione
+                            mensola.add(nuovoLibro);
+
+                            cont++;  // incremento il contatore di libri presente nella libreria
+
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+
+
+                    } else
+                        System.out.println("Mensola piena");
+
+
+                }
+
+                case 2 -> {
+                    System.out.println("Visualizzazione");
+                    mensola.forEach(l -> System.out.println(l.FormattaDati()));  // tramite un forEach (metodo dell'arraylist) stampo tutta la mensola
+                }
+
+                case 3 -> {
+                    System.out.println("Cancellazione per Titolo");
+                    System.out.println("Inserisci un titolo: ");  // attributo dell'oggetto da eliminare
+                    String title = tastiera.nextLine();
+                    mensola.removeIf(l -> l.Titolo.equals(title));  // removeIf (metodo dell'arraylist) rimuove il libro se ha come titolo "title"
+
+                }
+
+                case 4 -> {
+                    System.out.println("Visualizzazione per Autore");
+                    mensola.forEach(l -> System.out.println(l.Autore));  // stampa tutti i libri con autore "Autore"
+                }
+
+                case 5 -> {
+                    System.out.println("Visualizzazione per Titolo");
+                    mensola.forEach(l -> System.out.println(l.Titolo));  // stampa tutti i libri con titolo "Titolo"
+                }
+
+                case 6 -> {
+                    System.out.println("Visualizzazione per Data");
+                    mensola.forEach(l -> System.out.println(l.dataDiPubblicazione));  // stampa tutti i libri con data "dataDiPubblicazione"
+                }
+
+                case 7 -> {
+                    System.out.println("Modifica numero di pagine");
+                    System.out.println("Inserisci l' autore: ");
+                    String nuovoAutore = tastiera.nextLine();
+                    System.out.println("Inserisci il titolo: ");
+                    String nuovoTitolo = tastiera.nextLine();
+                    System.out.println("Digita il nuovo numero di pagine: ");
+                    int nuovePagine = Integer.parseInt(tastiera.nextLine());
+                    try {
+                        modificaPagine(mensola, nuovoTitolo, nuovoAutore, nuovePagine);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+
+                }
+
+                case 8 -> {
+                    mensola.forEach(l -> System.out.println("Autore: " + l.Autore + ", Titolo: " + l.Titolo + ", Prezzo" + l.prezzo));
+                }
+
+                case 9 -> {
+                    System.out.println("Fine");
+                    uscita = true;
+                }
+                default -> System.out.println("Scelta non valida");
+            }
+        } while (!uscita);
+    }
+
+
+    public static boolean libroDoppio(ArrayList<Libro> mensola, Libro nuovoLibro) {  // metodo per il controllo che il libro "nuovoLibro" non sia gia' presente nella mensola
+        for (Libro libro : mensola) {
+            if (nuovoLibro.Autore.equals(libro.Autore) && nuovoLibro.Titolo.equals(libro.Titolo))
+                return true;
+        }
+        return false;
+    }
+
+    public static void modificaPagine(ArrayList<Libro> mensola, String nuovoTitolo, String nuovoAutore, int nuovePagine) throws Exception {
+        for (Libro libro : mensola) {
+            if (libro.Titolo.equalsIgnoreCase(nuovoTitolo) && libro.Autore.equalsIgnoreCase(nuovoAutore)) {
+                libro.pagine = nuovePagine;
+                System.out.println("Il numero di pagine per il libro " + nuovoTitolo + " e' stato aggiornato a " + nuovePagine);
+            }
+        }
+
+        throw new Exception("Il libro " + nuovoTitolo + " non è stato trovato nella mensola");
+    }
+
+    public static boolean exceptionMethod(ArrayList<Libro> mensola, Libro nuovoLibro) throws Exception {  // metodo che solleva un eccezione sulla presenza di "nuovoLibro" nella mensola
+        if (!libroDoppio(mensola, nuovoLibro))  // controllo che il libro non sia gia' presente nella mensola
+            return false;
+
+        else
+            throw new Exception("Libro gia' presente");
+
+
+    }
+}

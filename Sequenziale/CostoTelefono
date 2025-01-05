@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class CostoTelefono {
+    public static void main(String[] args) {
+        Scanner tastiera = new Scanner(System.in);
+        int costoSmartphone = 400;
+        System.out.println("inserisci il tuo buono sconto (da 1 a 3)");
+        int vInserito = Integer.parseInt(tastiera.nextLine()); // trasforma un valore numerico contenuto nella stringa in un numero intero
+        int nuovoCostoSmartphone = switch (vInserito) {
+            case 1 -> {
+                costoSmartphone -= 10;
+                System.out.println("ti sto applicando uno sconto di 10 euro");
+                yield costoSmartphone;
+            }
+            case 2 -> {
+                costoSmartphone -= 20;
+                System.out.println("ti sto applicando uno sconto di 20 euro");
+                yield costoSmartphone;
+            }
+            case 3 -> {
+                costoSmartphone -= 30;
+                System.out.println("ti sto applicando uno sconto di 30 euro");
+                yield costoSmartphone;
+            }
+            default -> {
+                System.out.println("sconto non valido");
+                yield costoSmartphone;
+            }
+        };
+        System.out.println(nuovoCostoSmartphone);
+    }
+}

@@ -1,0 +1,50 @@
+import javax.management.relation.InvalidRelationServiceException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner tastiera = new Scanner(System.in);
+        final int MAXAUTO = 30;
+        ArrayList<Automobile> concessionaria = new ArrayList<>(MAXAUTO);
+
+        // Automobile auto1 = new Automobile();
+        System.out.println("Inserimento: ");
+
+
+        for (int i = 0; i < 3; i++) {
+
+            if (concessionaria.size() < MAXAUTO) {
+                Automobile auto = inserimento(concessionaria, tastiera);
+                concessionaria.add(auto);
+                
+            } else {
+                System.out.println("Concessionaria piena");
+                break;
+            }
+        }
+
+
+    }
+
+    public static Automobile inserimento(ArrayList<Automobile> concessionaria, Scanner tastiera) {
+
+        Automobile auto = new Automobile();
+        auto.marca = tastiera.nextLine();
+        auto.modello = tastiera.nextLine();
+        auto.dataDiProduzione = LocalDate.parse(tastiera.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        auto.cilindrata = tastiera.nextInt();
+
+        return auto;
+    }
+
+    public static void autoDoppia(ArrayList<Automobile> concessionaria, Automobile auto) {
+
+        // for(auto : concessionaria) {
+
+
+    }
+}

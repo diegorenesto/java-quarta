@@ -1,0 +1,53 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class FindAll {
+    public static void main(String[] args) {
+        Scanner tastiera = new Scanner(System.in);
+        Random genera = new Random();
+
+        System.out.println("Inserisci la lunghezza del vettore: ");
+        int lunghezza = tastiera.nextInt();
+        int[] vettore = new int[lunghezza];
+        for (int i = 0; i < lunghezza; i++) {
+            vettore[i] = genera.nextInt(0, 10) + 1;
+        }
+        for(int j : vettore) {
+            System.out.print(j + " ");
+        }
+
+        System.out.println("\nInserisci il numero da cercare: ");
+        int num = tastiera.nextInt();
+
+
+        int[] vettore2 = findAll(num, vettore);
+        if (vettore2 != null) {
+            System.out.println("Il numero " + num + " si trova nelle posizioni: ");
+            for (int i : vettore2) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+
+    public static int[] findAll(int num, int[] vet) {
+        int cont = 0;
+
+        for (int i : vet) {
+            if (i == num) {
+                cont++;         // controllo quante volte il numero è presente
+            }
+        }
+        if (cont > 0) {
+            int[] vet2 = new int[cont];         // vettore 2 di dimensione cont
+
+            cont = 0;
+            for (int i = 0; i < vet.length; i++) {
+                if (vet[i] == num) {
+                    vet2[cont++] = i;
+                }
+            }
+            return vet2;
+        }
+        return null;
+    }
+}

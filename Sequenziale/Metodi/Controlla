@@ -1,0 +1,20 @@
+public static void controlla(int[] vettore) {
+        Scanner tastiera = new Scanner(System.in);
+        int numero;
+        System.out.println("Inserisci un numero: ");
+        numero = tastiera.nextInt();
+        boolean trovato = false;
+        for (int i = 0; i < vettore.length; i++) {
+            if (vettore[i] == numero) {
+                // Stampa l'indice e il valore
+                System.out.println("Il numero e' presente e si trova all'indirizzo " + i + 1);
+                trovato = true;
+                break;
+            }
+        }
+
+        if (!trovato) {
+            System.out.println("Il numero non e' presente");
+        }
+
+    }

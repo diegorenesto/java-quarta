@@ -1,0 +1,111 @@
+
+
+import static utility.Tools.*;
+
+import java.sql.SQLOutput;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Random;
+
+public class RandomSenzaRipetizioni {
+    public static void main(String[] args) {
+        Scanner tastiera = new Scanner(System.in);
+        String[] opzioni = {"Menu", "1 Genera Random", "2 Visualizzazione", "3 Controllo", "4 Raddoppia", "5 Fine"};
+        boolean esci = true;
+        int[] nEstratti = new int[100];
+
+        do {
+            switch (Menu(opzioni, tastiera)) {
+                case 1:
+                    System.out.println("Generazione");
+                    generaNumeri(nEstratti);
+                    break;
+                case 2:
+                    System.out.println("Visualizzazione");
+                    visualizza(nEstratti);
+                    break;
+
+                case 3:
+                    System.out.println("Controllo");
+                    controlla(nEstratti);
+                    break;
+
+                case 4:
+                    System.out.println("Raddoppia");
+                    System.out.println("\nVettore raddoppiato");
+                    int[] vettore2 = raddoppiaVettore(nEstratti);
+                    visualizza(vettore2);
+                    break;
+
+                case 5:
+                    System.out.println("Fine");
+                    esci = false;
+                    break;
+            }
+        } while (esci);
+    }
+
+    public static void generaNumeri(int[] vettore) {
+        Random numeroRandom = new Random();
+        int numero; // numero da generare e inserire nel vettore
+        int cont = 0; // verifica quanti numeri sono presenti senza ripetizioni
+
+        do {
+            numero = numeroRandom.nextInt(0, vettore.length) + 1;
+            boolean presente = false; // true se numero presente, false se no
+
+            for (int i = 0; i < cont; i++) { // Controlla se il numero è già presente
+                if (vettore[i] == numero) {
+                    presente = true;
+                }
+            }
+
+            if (!presente) { // se non è presente lo aggiungo all'array
+                vettore[cont] = numero;
+                cont++;
+            }
+        } while (cont < vettore.length);
+    }
+
+    public static void visualizza(int[] vettore) { // metodo per stampare il vettore; vado a capo ogni 10 cifre
+        int cont = 0;
+        for (int i : vettore) {
+            System.out.printf("%4d", i);
+            cont++;
+            if (cont == 10) {
+                cont = 0;
+                System.out.println();
+            }
+        }
+    }
+
+    public static void controlla(int[] vettore) {
+        Scanner tastiera = new Scanner(System.in);
+        int numero;
+        System.out.println("Inserisci un numero: ");
+        numero = tastiera.nextInt();
+        boolean trovato = false;
+        for (int i = 0; i < vettore.length; i++) {
+            if (vettore[i] == numero) {
+                // Stampa l'indice e il valore
+                System.out.println("Il numero e' presente e si trova all'indirizzo " + i + 1);
+                trovato = true;
+                break;
+            }
+        }
+
+        if (!trovato) {
+            System.out.println("Il numero non e' presente");
+        }
+
+    }
+
+    public static int[] raddoppiaVettore(int[] vet) {
+        int[] vet2 = new int[vet.length * 2];
+        for (int i = 0; i < vet.length; i++) {
+            vet2[i] = vet[i];
+        }
+
+        return vet2;
+    }
+}

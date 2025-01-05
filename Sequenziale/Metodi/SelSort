@@ -1,0 +1,16 @@
+public static void selectionSort(int[] vet) {
+        for (int i = 0; i < vet.length - 1; i++) {
+            int index = i;
+            for (int j = i + 1; j < vet.length; j++) {
+                if (vet[j] < vet[index]) {
+                    index = j;//searching for lowest index
+                }
+            }
+            int num = vet[index];
+            vet[index] = vet[i];
+            vet[i] = num;
+
+        }
+    }
+
+// e nel main stampi con un for o Arrays.toString(vettore)
