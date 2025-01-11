@@ -45,9 +45,12 @@ public class Main {
 
 
         System.out.println("\n\nOrdine decrescente: ");
-        Collections.sort(automobili, Collections.reverseOrder());
+//        Collections.sort(automobili, Collections.reverseOrder());
+        automobili.sort(Collections.reverseOrder());
         System.out.println(automobili);
-        
+
+
+        System.out.println("\n\nProgramma Terminato");
 
     }
 }
