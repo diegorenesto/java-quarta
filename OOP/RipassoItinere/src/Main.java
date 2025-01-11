@@ -12,7 +12,7 @@ public class Main {
 
 
         Automobile auto1 = new Automobile("Fiat", "Panda", 1000);
-        Automobile auto2 = new Automobile("Fiat", "Panda", 1000);
+        Automobile auto2 = new Automobile(auto1);
         Automobile auto3 = new Automobile("Kia", "Stonic", 1400);
 
 
@@ -47,7 +47,7 @@ public class Main {
         System.out.println("\n\nOrdine decrescente: ");
         Collections.sort(automobili, Collections.reverseOrder());
         System.out.println(automobili);
-
+        
 
     }
 }
