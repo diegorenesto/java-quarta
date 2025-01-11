@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 
-public class Automobile implements Comparable<Automobile>{
+public class Automobile implements Comparable<Automobile> {
 
     /*
      * creare classe Automobile:
@@ -33,6 +33,9 @@ public class Automobile implements Comparable<Automobile>{
 
 
     public Automobile(Automobile auto) {
+        this.marca = auto.marca;
+        this.modello = auto.modello;
+        this.cilindrata = auto.cilindrata;
     }
 
 
@@ -64,7 +67,7 @@ public class Automobile implements Comparable<Automobile>{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) return true;  // confronta due indirizzi
         if (o == null || getClass() != o.getClass()) return false;
         Automobile auto = (Automobile) o;
         return cilindrata == auto.cilindrata && Objects.equals(marca, auto.marca) && Objects.equals(modello, auto.modello);
