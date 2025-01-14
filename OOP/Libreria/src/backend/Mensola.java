@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Mensola {
-    Scanner tastiera = new Scanner(System.in);
     private int numeroLibri = 0;
     private int maxLibri;
     private ArrayList<Libro> mensola = new ArrayList<>();
