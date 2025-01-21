@@ -1,9 +1,9 @@
-
 package frontend;
 
 import backend.Genere;
 import backend.Libro;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -83,5 +83,43 @@ public class Tools {
             clrScr();
             System.out.println(l.toString());
         }
+    }
+
+    public static void findFile() {
+        // stampa il percorso della directory corrente
+        String userDirectory = System.getProperty("user.dir");
+        System.out.println("Percorso della directory corrente: " + userDirectory);
+
+        // stampa il contenuto della directory corrente
+        File dir = new File(userDirectory);
+        String[] list = dir.list();
+
+        System.out.println("Contenuto della directory:");
+        for (String s : list) {
+            System.out.println(s);
+        }
+    }
+
+    public static int fileSelection(String[] list, Scanner tastiera) {
+        if (list == null || list.length == 0) {
+            System.out.println("La directory è vuota");
+            return -1;
+        }
+
+        System.out.println("Seleziona un file dalla lista: ");
+        for (int i = 0; i < list.length; i++) {
+            System.out.println("[" + (i + 1) + "] " + list[i]);
+        }
+
+        int scelta;
+        do {
+            System.out.print("Inserisci il numero del file: ");
+            scelta = Integer.parseInt(tastiera.nextLine());
+            if (scelta < 1 || scelta > list.length) {
+                System.out.println("SCELTA NON VALIDA!");
+            }
+        } while (scelta < 1 || scelta > list.length);
+
+        return scelta - 1;
     }
 }
