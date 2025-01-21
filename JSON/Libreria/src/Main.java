@@ -7,6 +7,7 @@ import frontend.Tools;
 
 import static frontend.Tools.*;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -118,6 +119,15 @@ public class Main {
             }
         }
         while (!uscita);
+
+//        String userDirectory = System.getProperty("user.dir");
+//        File dir = new File(userDirectory);
+//        String[] list = dir.list();
+//
+//
+//        findFile();
+//        System.out.println("\n\n");
+//        fileSelection(list, tastiera);
 
 
     }
