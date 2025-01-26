@@ -85,19 +85,18 @@ public class Tools {
         }
     }
 
-    public static void findFile() {
-        // stampa il percorso della directory corrente
-        String userDirectory = System.getProperty("user.dir");
-        System.out.println("Percorso della directory corrente: " + userDirectory);
-
-        // stampa il contenuto della directory corrente
-        File dir = new File(userDirectory);
-        String[] list = dir.list();
-
-        System.out.println("Contenuto della directory:");
-        for (String s : list) {
-            System.out.println(s);
+     public static String[] findFile(String[] dir, String fileExt) {
+        String[] arr = new String[dir.length + 1];
+        arr[0] = "LISTA FILE " + fileExt;
+        int counter = 0;
+        for (String s : dir) {
+            if (s.endsWith(fileExt)) {
+                arr[++counter] = s;
+            }
         }
+        String[] secondArr = new String[counter+1];
+        System.arraycopy(arr, 0, secondArr, 0, secondArr.length);
+        return secondArr;
     }
 
     public static int fileSelection(String[] list, Scanner tastiera) {
