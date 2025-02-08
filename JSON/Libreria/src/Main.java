@@ -7,7 +7,6 @@ import frontend.Tools;
 
 import static frontend.Tools.*;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -21,30 +20,40 @@ public class Main {
         boolean soluzioni = false;
         Mensola libreria = new Mensola(3);
 
-        String[] opzioni = {"---LIBRERIA---", "1. Inserimento", "2. Visualizzazione", "3. Ricerca", "4. Cancellazione", "5. Salva su file JSON", "6. Leggi File JSON", "7. Salva su file CSV", "8. Leggi File CSV", "9. Libro non generico", "10. Fine"};
+        String[] opzioni = {"---LIBRERIA---", "1. Inserimento Libro Generico", "2. Libro non generico", "3. Visualizzazione", "4. Ricerca", "5. Cancellazione", "6. Salva su file JSON", "7. Leggi File JSON", "8. Salva su file CSV", "9. Leggi File CSV", "10. Fine"};
         do {
             clrScr();
             int scelta = Menu(opzioni, tastiera);
             switch (scelta) {
                 case 1 -> {
                     try {
-                        System.out.println("Inserimento");
-                        if (!libreria.checkSpace()) {
+                        System.out.println("Inserimento Libro Generico");
+                        if (!libreria.checkSpace())
                             libreria.addLibro(Tools.leggiLibro(tastiera, soluzioni));
-                        }
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                 }
 
                 case 2 -> {
+                    System.out.println("Libro non generico");
+                    try {
+                        Libro l = libreria.libroNonGenerico(tastiera);
+                        if (!libreria.checkSpace())
+                            libreria.addLibro(l);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                case 3 -> {
                     System.out.println("Visualizzazione");
                     if (!libreria.isEmpty()) {
                         libreria.visualizzaMensola();
                     }
                 }
 
-                case 3 -> {
+                case 4 -> {
                     System.out.println("Ricerca");
                     if (!libreria.isEmpty()) {
                         System.out.println("Inserisci un'autore: ");
@@ -56,7 +65,7 @@ public class Main {
                     }
                 }
 
-                case 4 -> {
+                case 5 -> {
                     System.out.println("Cancellazione");
                     int i = 0;
 
@@ -80,52 +89,35 @@ public class Main {
                             }
                         }
                     }
-
                 }
 
 
-                case 5 -> {
+                case 6 -> {
                     System.out.println("Salva su file JSON");
                     System.out.println("Inserisci il nome del file: ");
                     String fileName = tastiera.nextLine();
                     libreria.salvaJson(fileName);
                 }
 
-                case 6 -> {
+                case 7 -> {
                     System.out.println("Leggi file JSON");
                     System.out.println("Inserisci il nome del file: ");
                     String fileName = tastiera.nextLine();
                     libreria.leggiJson(fileName);
                 }
 
-                case 7 -> {
+                case 8 -> {
                     System.out.println("Scrivi Mensola");
                     System.out.println("Inserisci il nome del file: ");
                     String fileName = tastiera.nextLine();
                     scriviMensola(libreria, fileName);
                 }
 
-                case 8 -> {
+                case 9 -> {
                     System.out.println("Scrivi Mensola");
                     System.out.println("Inserisci il nome del file: ");
                     String fileName = tastiera.nextLine();
                     leggiMensola(libreria, fileName);
-                }
-
-                case 9 -> {
-                    System.out.println("Libro non generico");
-                    Manuale m = new Manuale("Diego Renesto", "OOP", 10000, "Java", Livello.ESPERTO);
-                    Romanzo r = new Romanzo("Franz Kafka  ", "Il Processo", 1000, GenereLetterario.FANTASY);
-                    Thriller t = new Thriller("Joel Dicker", "Un animale selvaggio", 1000, true);
-                    try {
-                        libreria.addLibro(m);
-                        libreria.addLibro(r);
-                        libreria.addLibro(t);
-                        libreria.visualizzaMensola();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-
                 }
 
                 case 10 -> {
@@ -136,17 +128,8 @@ public class Main {
         }
         while (!uscita);
 
-//        String userDirectory = System.getProperty("user.dir");
-//        File dir = new File(userDirectory);
-//        String[] list = dir.list();
-//
-//
-//        findFile();
-//        System.out.println("\n\n");
-//        fileSelection(list, tastiera);
-
-
     }
+
 
     public static void scriviMensola(Mensola m, String fileName) {
         ArrayList<String> strings = new ArrayList<>();
@@ -158,7 +141,6 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     public static Mensola leggiMensola(Mensola m, String fileName) {
@@ -175,6 +157,4 @@ public class Main {
         }
         return m;
     }
-
-
 }

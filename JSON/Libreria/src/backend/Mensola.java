@@ -1,3 +1,4 @@
+
 package backend;
 
 import com.google.gson.Gson;
@@ -124,6 +125,47 @@ public class Mensola {
         for (Libro l : mensola) {
             System.out.println(l.stampaLibro());
         }
+    }
+
+    public Libro libroNonGenerico(Scanner tastiera) throws Exception {
+        System.out.print("Inserisci l'autore del libro: ");
+        String autore = tastiera.nextLine();
+        System.out.print("Inserisci il titolo del libro: ");
+        String titolo = tastiera.nextLine();
+        System.out.print("Inserisci il numero di pagine del libro: ");
+        int nPagine = Integer.parseInt(tastiera.nextLine());
+        System.out.println("Inserisci il genere del libro:\n" +
+                "ROMANZO,\n" +
+                "MANUALE,\n" +
+                "THRILLER");
+        Genere genere = Genere.valueOf(tastiera.nextLine());
+        if (genere.equals(Genere.ROMANZO)) {
+            System.out.println("Inserisci il genere letterario del libro:\n" +
+                    "1. ROMANZOSTORICO,\n" +
+                    "2. FANTASY,\n" +
+                    "3. ARMONY");
+            int genereLetterario = Integer.parseInt(tastiera.nextLine());
+            return new Romanzo(autore, titolo, nPagine, GenereLetterario.values()[genereLetterario - 1]);
+        } else if (genere.equals(Genere.MANUALE)) {
+            System.out.println("Inserisci l'argomento del libro: ");
+            String argomento = tastiera.nextLine();
+            System.out.println("Inserisci il livello del libro:\n" +
+                    "1. BASE,\n" +
+                    "2. PRINCIPIANTE,\n" +
+                    "3. ESPERTO");
+            int livello = Integer.parseInt(tastiera.nextLine());
+            return new Manuale(autore, titolo, nPagine, argomento, Livello.values()[livello - 1]);
+        } else if (genere.equals(Genere.THRILLER)) {
+            System.out.println("il libro ha una serie TV? (s/n)");
+            String risposta = tastiera.nextLine();
+            boolean serieTv;
+            if (risposta.equals("s"))
+                serieTv = true;
+            else
+                serieTv = false;
+            return new Thriller(autore, titolo, nPagine, serieTv);
+        } else
+            throw new Exception("ERRORE NELLA CREAZIONE DEL LIBRO!");
     }
 
 }

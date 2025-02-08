@@ -52,7 +52,7 @@ public class Libro {
     }
 
     public String stampaLibro() {
-        return String.format("Autore: %s Titolo: %s Numero Pagine: %d Costo: %f", autore, titolo, nPagine, costoPagine * nPagine);
+        return String.format("Autore: %s, Titolo: %s, Numero Pagine: %d, Costo: %f", autore, titolo, nPagine, costoPagine * nPagine);
     }
 
 }
