@@ -73,7 +73,6 @@ public class Concessionaria {
     }
 
     public void salvaJson(String fileName) {
-
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String jsonContent = gson.toJson(officina);

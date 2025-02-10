@@ -1,0 +1,15 @@
+[
+  {
+    "marca": "Fiat",
+    "modello": "Panda",
+    "prezzo": 5000,
+    "carburante": "BENZINA"
+  },
+  {
+    "nPorte": 4,
+    "marca": "Kia",
+    "modello": "Stonic",
+    "prezzo": 25000,
+    "carburante": "GPL"
+  }
+]
