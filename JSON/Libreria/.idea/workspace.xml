@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10dffc0f-cee6-44c9-8acf-1beb8fd35740" name="Changes" comment="" />
+    <list default="true" id="10dffc0f-cee6-44c9-8acf-1beb8fd35740" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RipassoInterrogazione/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../RipassoInterrogazione/src/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,6 +43,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/diego/OneDrive/Desktop/java-quarta/JSON/Libreria&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -83,6 +87,10 @@
       <updated>1739039254455</updated>
       <workItem from="1739039255608" duration="2326000" />
       <workItem from="1739197240890" duration="31000" />
+      <workItem from="1739217093091" duration="27000" />
+      <workItem from="1739217127889" duration="72000" />
+      <workItem from="1739217212642" duration="11000" />
+      <workItem from="1739217250932" duration="12000" />
     </task>
     <servers />
   </component>

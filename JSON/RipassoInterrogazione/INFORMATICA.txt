@@ -1,0 +1,19 @@
+INFORMATICA
+argomenti:
+- JSON
+- ereditarietà
+- polimorfismo
+
+progetti:
+Libreria (JSON)
+Officina (ereditarietà)
+
+JSON	
+	standard per scambio di dati, anche in altri linguaggi e applicazioni
+	utilizzato per rappresentare oggetti e array.
+	(Java Script Object Notation)
+Ereditarietà
+	uno dei principi basilari della OOP,                                                                                                   
+	meccanismo che consente ad una sottoclasse di ereditare attributi e metodi 	da una superclasse, favorendo il riutilizzo del codice e a creare una 	gerarchia di classi.
+Polimorfismo
+	Overriding (più metodi con lo stesso nome)

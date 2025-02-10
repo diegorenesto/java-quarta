@@ -43,6 +43,5 @@ public class Main {
             concessionaria.leggiJson(sc.nextLine());
         } else
             System.out.println("Fine programma");
-
     }
 }

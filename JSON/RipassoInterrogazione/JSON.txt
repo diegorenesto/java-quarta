@@ -1,0 +1,23 @@
+JSON
+public void salvaJson(String fileName) {
+        try {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String jsonContent = gson.toJson(officina);
+            Files.write(Paths.get(fileName), jsonContent.getBytes());
+            System.out.println("Dati salvati con successo");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+public void leggiJson(String fileName) {
+        try {
+            byte[] jsonContent = Files.readAllBytes(Paths.get(fileName));
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Veicolo[] collezione = gson.fromJson(new String(jsonContent), Veicolo[].class);
+            officina = new ArrayList<>(Arrays.asList(collezione)); 
+            System.out.println(officina);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
