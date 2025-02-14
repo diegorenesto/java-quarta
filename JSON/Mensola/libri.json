@@ -1,0 +1,23 @@
+[
+  {
+    "autore": "a",
+    "titolo": "b",
+    "nPagine": 100,
+    "costoPagine": 0.05
+  },
+  {
+    "genereLetterario": "FANTASY",
+    "autore": "a",
+    "titolo": "ciao",
+    "nPagine": 10000,
+    "costoPagine": 0.05
+  },
+  {
+    "argomento": "ciao",
+    "livello": "ESPERTO",
+    "autore": "autor3e",
+    "titolo": "2o",
+    "nPagine": 100,
+    "costoPagine": 0.05
+  }
+]

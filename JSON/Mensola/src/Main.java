@@ -14,10 +14,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        boolean uscita = false;
-
         Scanner tastiera = new Scanner(System.in);
-        boolean soluzioni = false;
+        boolean uscita = false;
         Mensola libreria = new Mensola(3);
 
         String[] opzioni = {"---LIBRERIA---", "1. Inserimento Libro Generico", "2. Libro non generico", "3. Visualizzazione", "4. Ricerca", "5. Cancellazione", "6. Salva su file JSON", "7. Leggi File JSON", "8. Salva su file CSV", "9. Leggi File CSV", "10. Fine"};
@@ -29,7 +27,7 @@ public class Main {
                     try {
                         System.out.println("Inserimento Libro Generico");
                         if (!libreria.checkSpace())
-                            libreria.addLibro(Tools.leggiLibro(tastiera, soluzioni));
+                            libreria.addLibro(libreria.leggiLibro(tastiera));
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
@@ -44,10 +42,7 @@ public class Main {
                         String titolo = tastiera.nextLine();
                         System.out.println("Inserisci il numero di pagine del libro: ");
                         int nPagine = Integer.parseInt(tastiera.nextLine());
-                        System.out.println("Inserisci il genere del libro:\n" +
-                                "ROMANZO,\n" +
-                                "MANUALE,\n" +
-                                "THRILLER");
+                        System.out.println("Inserisci il genere del libro:\n" + "ROMANZO,\n" + "MANUALE,\n" + "THRILLER");
                         Genere genere = Genere.valueOf(tastiera.nextLine());
                         Libro l = libreria.libroNonGenerico(tastiera, autore, titolo, nPagine, genere);
                         if (!libreria.checkSpace())
@@ -72,13 +67,13 @@ public class Main {
                         System.out.println("Inserisci un titolo: ");
                         String titolo = tastiera.nextLine();
 
-                        System.out.println("Il libro è presente nella mensola: " + libreria.findLibro(autore, titolo));
+                        Libro libroDaTrovare = new Libro(autore, titolo);
+                        System.out.println("Il libro è presente nella mensola: " + libreria.findLibro(libroDaTrovare));
                     }
                 }
 
                 case 5 -> {
                     System.out.println("Cancellazione");
-                    int i = 0;
 
                     if (!libreria.isEmpty()) {
                         System.out.println("Inserisci l'autore del libro");
@@ -86,17 +81,13 @@ public class Main {
                         System.out.println("Inserisci il titolo del libro");
                         String titolo = tastiera.nextLine();
 
-                        if (libreria.findLibro(autore, titolo)) {
-                            for (i = 0; i < libreria.getMensola().size(); i++) {
-                                Libro libro1 = libreria.getMensola().get(i);
-                                if (libro1.getAutore().equals(autore) && libro1.getTitolo().equals(titolo)) {
-                                    try {
-                                        libreria.removeBook(libro1);
-                                        System.out.println("Libro eliminato");
-                                    } catch (Exception e) {
-                                        System.out.println("Errore: " + e.getMessage());
-                                    }
-                                }
+                        Libro libroDaRimuovere = new Libro(autore, titolo);
+                        if (libreria.findLibro(libroDaRimuovere)) {
+                            try {
+                                libreria.removeBook(libroDaRimuovere);
+                                System.out.println("Libro eliminato");
+                            } catch (Exception e) {
+                                System.out.println("Errore: " + e.getMessage());
                             }
                         }
                     }
@@ -135,8 +126,7 @@ public class Main {
                     uscita = true;
                 }
             }
-        }
-        while (!uscita);
+        } while (!uscita);
 
     }
 
