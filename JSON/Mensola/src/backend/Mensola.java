@@ -138,17 +138,6 @@ public class Mensola {
     }
 
     public Libro libroNonGenerico(Scanner tastiera, String autore, String titolo, int nPagine, Genere genere) throws Exception {
-//        System.out.println("Inserisci l'autore del libro: ");
-//        String autore = tastiera.nextLine();
-//        System.out.println("Inserisci il titolo del libro: ");
-//        String titolo = tastiera.nextLine();
-//        System.out.println("Inserisci il numero di pagine del libro: ");
-//        int nPagine = Integer.parseInt(tastiera.nextLine());
-//        System.out.println("Inserisci il genere del libro:\n" +
-//                "ROMANZO,\n" +
-//                "MANUALE,\n" +
-//                "THRILLER");
-//        Genere genere = Genere.valueOf(tastiera.nextLine());
         if (genere.equals(Genere.ROMANZO)) {
             System.out.println("Inserisci il genere letterario del libro:\n" +
                     "1. ROMANZOSTORICO,\n" +

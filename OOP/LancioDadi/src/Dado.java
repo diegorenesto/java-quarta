@@ -6,7 +6,7 @@ public class Dado {
     Random genera = new Random();
 
     public Dado(int nFaccie) {
-        this.nFaccie = genera.nextInt(1, nFaccie + 1);
+        this.nFaccie = nFaccie;
     }
 
     public int lanciaDado() {
