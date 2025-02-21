@@ -95,23 +95,23 @@ public class Mensola {
     public void salvaJson(String fileName) {
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String jsonContent = gson.toJson(mensola);
-            Files.write(Paths.get(fileName), jsonContent.getBytes());
+            String json = gson.toJson(mensola);
+            Files.write(Paths.get(fileName), json.getBytes());
             System.out.println("Dati salvati con successo");
         } catch (Exception e) {
-            System.out.println("Errore durante il salvataggio: " + e.getMessage());
+            System.out.println("Errore! " + e.getMessage());
         }
     }
 
     public void leggiJson(String fileName) {
         try {
-            byte[] jsonContent = Files.readAllBytes(Paths.get(fileName));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            byte[] jsonContent = Files.readAllBytes(Paths.get(fileName));
             Libro[] collezione = gson.fromJson(new String(jsonContent), Libro[].class);
             mensola = new ArrayList<>(Arrays.asList(collezione)); // permette ad un array di diventare ArrayList
             System.out.println(mensola);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Errore! " + e.getMessage());
         }
     }
 
