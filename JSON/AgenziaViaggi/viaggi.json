@@ -1,0 +1,26 @@
+[
+  {
+    "destinazione": "Lussemburgo",
+    "costo": 250,
+    "giorni": 10
+  },
+  {
+    "compagniaAerea": "Turkish AirLines",
+    "numeroVolo": 5,
+    "aeroportoPartenza": "Bologna",
+    "aeroportoArrivo": "Toronto",
+    "classe": "BUSINESS",
+    "destinazione": "Canada",
+    "costo": 1200,
+    "giorni": 14
+  },
+  {
+    "nomeNave": "Costa Smeralda",
+    "portoPartenza": "Venezia",
+    "tipoCabina": "SUITE",
+    "pastiInclusi": true,
+    "destinazione": "Spagna",
+    "costo": 1000,
+    "giorni": 14
+  }
+]
