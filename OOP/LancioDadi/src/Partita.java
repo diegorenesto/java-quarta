@@ -60,9 +60,10 @@ public class Partita {
     }
 
     public void vincitore() {
-        if (g1.getRoundVinti() > g2.getRoundVinti())
+        int confronto = g1.compareTo(g2);
+        if (confronto > 0)
             System.out.println("Il vincitore e': " + g1);
-        else if (g1.getRoundVinti() < g2.getRoundVinti())
+        else if (confronto < 0)
             System.out.println("Il vincitore e': " + g2);
         else
             System.out.println("La partita e' finita in pareggio");
