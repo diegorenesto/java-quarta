@@ -1,14 +1,16 @@
-public class Giocatore implements Comparable<Giocatore> {
+public class Giocatore {
     private String nome;
     private String cognome;
-    private int roundVinti; // round
-    private int numUscito;
-    private int partiteVinte = 0; // partita = insieme di round
+    private Dado dado;
+    private int roundVinti = 0;
+    private int partiteVinte = 0;
+    private int vittorieConsecutive = 0;
+    private int punti = 0; // si accumulano vincendo una partita, o vincendone tre di fila
 
     public Giocatore(String nome, String cognome) {
         this.nome = nome;
         this.cognome = cognome;
-        this.roundVinti = 0;
+        dado = new Dado(6);
     }
 
     public String getNome() {
@@ -19,52 +21,60 @@ public class Giocatore implements Comparable<Giocatore> {
         return cognome;
     }
 
-
-    public int getNumUscito() {
-        return numUscito;
+    public Dado getDado() {
+        return dado;
     }
 
     public int getRoundVinti() {
         return roundVinti;
     }
 
-    public void vittoria() { // vittoria partita (insieme di più round)
-        partiteVinte++;
-    }
-
     public int getPartiteVinte() {
         return partiteVinte;
     }
 
-    public void haVinto() { // vittoria round
-        System.out.println(nome + " " + cognome + " ha vinto");
-        this.roundVinti++;
+    public int getVittorieConsecutive() {
+        return vittorieConsecutive;
+    }
+
+    public int getPunti() {
+        return punti;
+    }
+
+    public void vinceRound() {
+        System.out.println("RISULTATO: " + nome + " " + cognome + " ha vinto il round");
+        roundVinti++;
     }
 
     public void pareggio() {
-        this.roundVinti++;
+        roundVinti++;
     }
 
-    public int lanciaDado() {
-        Dado dado = new Dado(6);
-        numUscito = dado.lanciaDado();
-        return numUscito;
+    public void restart() { // resetta i round vinti per le partite successive
+        roundVinti = 0;
     }
 
-    public void reset() { // metodo usato per fare in modo che la partita venga resettata
-        this.nome = null;
-        this.cognome = null;
-        this.roundVinti = 0;
-        this.numUscito = 0;
+    public void vincePartita() {
+        System.out.println("VINCITORE: " + nome + " " + cognome);
+        partiteVinte++;
+        punti++;
     }
 
-    @Override
-    public int compareTo(Giocatore altroGiocatore) {
-        return Integer.compare(this.partiteVinte, altroGiocatore.partiteVinte);
+    public void incrementaVittorieConsecutive() {
+        vittorieConsecutive++;
+    }
+
+    public void azzeraVittorieConsecutive() {
+        vittorieConsecutive = 0;
+    }
+
+    public void vinceTreConsecutive() {
+        punti++;
+        azzeraVittorieConsecutive();
     }
 
     @Override
     public String toString() {
-        return String.format("Nome: %s, Cognome: %s", nome, cognome);
+        return String.format("Nome: %s Cognome: %s", nome, cognome);
     }
 }

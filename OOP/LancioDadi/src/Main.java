@@ -1,36 +1,33 @@
 import java.util.Scanner;
 
+import static utility.Tools.*;
+
 public class Main {
     public static void main(String[] args) {
+        // objects
         Scanner tastiera = new Scanner(System.in);
-        Giocatore g1 = new Giocatore("Diego", "Renesto");
-        Giocatore g2 = new Giocatore("Nicolo'", "Zanforlin");
+        boolean uscita = false;
+        Giocatore g1 = new Giocatore("Giuseppe", "Parini");
+        Giocatore g2 = new Giocatore("Vittorio", "Alfieri");
+        Partita partita = new Partita(g1, g2);
 
-        System.out.println(g1);
-        System.out.println(g2);
-
-        System.out.println("Quante partite vuoi giocare?");
-        int nPartite = tastiera.nextInt();
-        Partita partita = new Partita(g1, g2, nPartite, new Dado(6));
-
-        try {
-            partita.giocaPartita();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        System.out.println("\n");
-        partita.finePartita();
-        partita.vincitore();
-
-
-        System.out.println("--------");
-        System.out.println(g1.getNome() + " " + g1.getCognome() + " ha vinto " + g1.getPartiteVinte() + " partite");
-        System.out.println(g2.getNome() + " " + g2.getCognome() + " ha vinto " + g2.getPartiteVinte() + " partite");
-
-
-        System.out.println("--------");
-        partita.resetGame();
-        System.out.println(partita);
+        String[] opzioni = {"GARA LANCIO DADI", "1. Gioca partita base", "2. Gioca partita avanzate", "3. Fine"};
+        do {
+            int scelta = Menu(opzioni, tastiera);
+            switch (scelta) {
+                case 1 -> {
+                    System.out.println("Partita base");
+                    partita.giocaPartita();
+                }
+                case 2 -> {
+                    System.out.println("Partita avanzate");
+                    partita.giocaPartitaAvanzata();
+                }
+                case 3 -> {
+                    System.out.println("Fine");
+                    uscita = true;
+                }
+            }
+        } while (!uscita);
     }
 }

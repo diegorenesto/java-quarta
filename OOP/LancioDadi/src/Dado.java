@@ -16,7 +16,7 @@ public class Dado implements Comparable<Dado> {
 
     @Override
     public int compareTo(Dado o) {
-        return Integer.compare(this.nFaccie, o.nFaccie);
+        return Integer.compare(this.numUscito, o.numUscito);
     }
 
     @Override
