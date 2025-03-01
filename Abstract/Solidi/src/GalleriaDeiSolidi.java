@@ -10,7 +10,7 @@ public class GalleriaDeiSolidi {
     public void addSolido(Solido solido) throws CloneNotSupportedException {
         if (solido != null && !(galleria.contains(solido))) {
             galleria.add(solido.clone());
-        } else throw new RuntimeException("ERRORE! SOLIDO NON INSERITO NELLA LISTA!");
+        } else throw new CloneNotSupportedException("ERRORE! SOLIDO NON INSERITO NELLA LISTA!");
     }
 
     // VIOLA L'INCAPSULAMENTO
@@ -23,6 +23,7 @@ public class GalleriaDeiSolidi {
 //            throw new RuntimeException("LISTA VUOTA");
 //    }
 
+    // RISPETTA L'INCAPSULAMENTO
     public ArrayList<Solido> visualizzaGalleria() throws CloneNotSupportedException {
         ArrayList<Solido> temp = new ArrayList<>();
         for (Solido s : galleria) {
