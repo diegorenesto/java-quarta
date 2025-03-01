@@ -20,5 +20,4 @@ public class Sfera extends Solido {
     public String toString() {
         return super.toString() + String.format(" e sono una sfera: Superficie: %.2f , Volume: %.2f", superficie(), volume());
     }
-
 }
