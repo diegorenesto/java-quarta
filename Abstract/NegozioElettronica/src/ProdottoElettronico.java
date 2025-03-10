@@ -1,4 +1,5 @@
 abstract public class ProdottoElettronico implements Cloneable {
+
     private int codiceProdotto;
     private String marca;
     private int prezzo;

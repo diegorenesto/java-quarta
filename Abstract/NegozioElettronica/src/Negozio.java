@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Negozio {
+
     private ArrayList<ProdottoElettronico> prodotti;
 
     public Negozio() {
@@ -8,38 +9,39 @@ public class Negozio {
     }
 
     public void addProdotto(ProdottoElettronico prodotto) throws CloneNotSupportedException {
-        if (prodotto != null && !(prodotti.contains(prodotto)))
-            prodotti.add(prodotto.clone());
-        else
-            throw new CloneNotSupportedException();
+        if (prodotto != null) {
+            if (!(prodotti.contains(prodotto)))
+                prodotti.add(prodotto.clone());
+            else
+                throw new CloneNotSupportedException();
+        } else
+            throw new NullPointerException();
     }
 
-    public void removeProdotto(ProdottoElettronico prodotto) {
-
+    public void removeProdotto(int codice) {
+        for (ProdottoElettronico prodotto : prodotti) {
+            if (prodotto.getCodiceProdotto() == codice)
+                prodotti.remove(prodotto);
+        }
     }
 
-    public ProdottoElettronico ricercaCodice(int code) {
+    public ProdottoElettronico ricercaPerCodice(int codice) throws CloneNotSupportedException {
         for (ProdottoElettronico p : prodotti) {
-            if (p.getCodiceProdotto() == code)
-                return p;
+            if (p.getCodiceProdotto() == codice)
+                return p.clone();
         }
         return null;
     }
 
-    public ProdottoElettronico modificaPrezzo(ProdottoElettronico prodotto, int prezzo) throws Exception {
-        if (prodotto != null) {
-            if (prodotti.contains(prodotto)) {
-                ProdottoElettronico prodClone = prodotto.clone();
-                prodClone.setPrezzo(prezzo);
-                return prodClone;
-            } else
-                throw new Exception();
-        } else
-            throw new Exception();
+    public void modificaPrezzo(int codice, int prezzo) throws Exception {
+        for (ProdottoElettronico p : prodotti) {
+            if (p.getCodiceProdotto() == codice)
+                p.setPrezzo(prezzo);
+        }
     }
 
     public ArrayList<ProdottoElettronico> ritornaLista() throws CloneNotSupportedException {
-        ArrayList<ProdottoElettronico> temp = new ArrayList<>();
+        ArrayList<ProdottoElettronico> temp = new ArrayList<>(); // ArrayList temporanea per rispettare l'incapsulamento
         for (ProdottoElettronico p : prodotti) {
             temp.add(p.clone());
         }
