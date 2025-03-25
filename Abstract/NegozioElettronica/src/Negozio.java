@@ -10,33 +10,25 @@ public class Negozio {
 
     public void addProdotto(ProdottoElettronico prodotto) throws CloneNotSupportedException {
         if (prodotto != null) {
-            if (!(prodotti.contains(prodotto)))
-                prodotti.add(prodotto.clone());
-            else
-                throw new CloneNotSupportedException();
-        } else
-            throw new NullPointerException();
+            if (!(prodotti.contains(prodotto))) prodotti.add(prodotto.clone());
+            else throw new CloneNotSupportedException();
+        } else throw new NullPointerException();
     }
 
     public void removeProdotto(int codice) {
-        for (ProdottoElettronico prodotto : prodotti) {
-            if (prodotto.getCodiceProdotto() == codice)
-                prodotti.remove(prodotto);
-        }
+        prodotti.removeIf(p -> p.getCodiceProdotto() == codice);
     }
 
     public ProdottoElettronico ricercaPerCodice(int codice) throws CloneNotSupportedException {
         for (ProdottoElettronico p : prodotti) {
-            if (p.getCodiceProdotto() == codice)
-                return p.clone();
+            if (p.getCodiceProdotto() == codice) return p.clone();
         }
         return null;
     }
 
     public void modificaPrezzo(int codice, int prezzo) throws Exception {
         for (ProdottoElettronico p : prodotti) {
-            if (p.getCodiceProdotto() == codice)
-                p.setPrezzo(prezzo);
+            if (p.getCodiceProdotto() == codice) p.setPrezzo(prezzo);
         }
     }
 
