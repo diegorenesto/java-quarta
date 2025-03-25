@@ -9,7 +9,6 @@ public class Main {
         boolean uscita = false;
 
 
-
         ArrayList<Machine> machines = new ArrayList<>();
         ListaDispositivi lista = new ListaDispositivi();
 //        machines.add(s);
