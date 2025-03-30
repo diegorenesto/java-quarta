@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class Negozio {
 
-    //    private ArrayList<ProdottoElettronico> prodotti;
     private ArrayList<Prodotto> prodotti;
 
     public Negozio() {
@@ -12,28 +11,34 @@ public class Negozio {
     public void addProdotto(Prodotto prodotto) throws Exception {
 //        if (prodotto != null) {
 //            if (!(prodotti.contains(prodotto)))
-//                prodotti.add(prodotto.clone());
+//                prodotti.add(prodotto); // NON uso clone() perche' l oggetto deriva da un interfaccia
 //            else
-//                throw new CloneNotSupportedException();
-//        } else
-//            throw new NullPointerException();
-        if (prodotto != null) {
-            if (!(prodotti.contains(prodotto)))
-                prodotti.add(prodotto); // NON uso clone() perche' l oggetto deriva da un interfaccia
-            else
-                throw new Exception();
-        }
+//                throw new Exception();
+//        }
+        if (prodotto instanceof Smartphone) {
+            if (!(prodotti.contains(prodotto))) {
+                prodotti.add(((Smartphone) prodotto).clone());
+            }
+        } else if (prodotto instanceof Manuale) {
+            if (!(prodotti.contains(prodotto))) {
+                prodotti.add(((Manuale) prodotto).clone());
+            }
+        } else
+            throw new Exception("Prodotto non trovato");
     }
 
-    public void removeProdotto(int codice) {
+    public void removeProdotto(int codice) throws Exception {
         for (Prodotto p : prodotti) {
-            if (p instanceof ProdottoElettronico && ((ProdottoElettronico) p).getCodiceProdotto() == (codice)) {
+            if (p instanceof Smartphone && ((Smartphone) p).getCodiceProdotto() == (codice)) {
                 prodotti.remove(p);
                 System.out.println("Smartphone rimosso con successo");
-            } else if (p instanceof Libro && ((Libro) p).getIsbn() == codice) {
+                return;
+            } else if (p instanceof Manuale && ((Manuale) p).getIsbn() == codice) {
                 prodotti.remove(p);
                 System.out.println("Manuale rimosso con successo");
+                return;
             }
+            throw new Exception("Prodotto non trovato");
         }
     }
 

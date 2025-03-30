@@ -1,4 +1,4 @@
-abstract public class Libro implements Prodotto {
+abstract public class Libro implements Prodotto, Cloneable {
     private String nome;
     private String descrizione;
     private String autore;
@@ -22,5 +22,10 @@ abstract public class Libro implements Prodotto {
     @Override
     public String toString() {
         return String.format("Nome: %s, Descrizione: %s, Autore: %s, ISBN: %d, Prezzo: %d, Quantita: %d", nome, descrizione, autore, isbn, prezzo, quantita);
+    }
+
+    @Override
+    protected Libro clone() throws CloneNotSupportedException {
+        return (Libro) super.clone();
     }
 }

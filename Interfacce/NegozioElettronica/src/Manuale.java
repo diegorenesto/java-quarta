@@ -1,4 +1,4 @@
-public class Manuale extends Libro {
+public class Manuale extends Libro implements Cloneable {
     private String argomento;
 
     public Manuale(String nome, String descrizione, String autore, int isbn, int prezzo, int quantita, String argomento) {

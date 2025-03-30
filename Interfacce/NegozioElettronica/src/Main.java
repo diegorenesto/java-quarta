@@ -72,7 +72,11 @@ public class Main {
                     System.out.println("Rimuovi un prodotto esistente");
                     System.out.println("Inserisci il codice (o l'isbn) per rimuovere un prodotto: ");
                     int codice = Integer.parseInt(tastiera.nextLine());
-                    negozio.removeProdotto(codice);
+                    try {
+                        negozio.removeProdotto(codice);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
 
                 case 4 -> {
