@@ -1,13 +1,27 @@
 import java.util.ArrayList;
 
+/**
+ * @author Diego Renesto
+ * @version 1.0
+ * @since 31/03/2025
+ */
 public class Negozio {
 
     private ArrayList<Prodotto> prodotti;
 
+    /**
+     * metodo costruttore di Negozio
+     */
     public Negozio() {
         prodotti = new ArrayList<>();
     }
 
+    /**
+     * metodo per aggiungere un prodotto alla lista
+     *
+     * @param prodotto
+     * @throws Exception
+     */
     public void addProdotto(Prodotto prodotto) throws Exception {
 //        if (prodotto != null) {
 //            if (!(prodotti.contains(prodotto)))
@@ -27,13 +41,19 @@ public class Negozio {
             throw new Exception("Prodotto non trovato");
     }
 
+    /**
+     * metodo per rimuovere un prodotto dalla lista
+     *
+     * @param codice
+     * @throws Exception
+     */
     public void removeProdotto(int codice) throws Exception {
         for (Prodotto p : prodotti) {
-            if (p instanceof Smartphone && ((Smartphone) p).getCodiceProdotto() == (codice)) {
+            if (p instanceof Smartphone && ((Smartphone) p).getCodice() == (codice)) {
                 prodotti.remove(p);
                 System.out.println("Smartphone rimosso con successo");
                 return;
-            } else if (p instanceof Manuale && ((Manuale) p).getIsbn() == codice) {
+            } else if (p instanceof Manuale && ((Manuale) p).getCodice() == codice) {
                 prodotti.remove(p);
                 System.out.println("Manuale rimosso con successo");
                 return;
@@ -43,6 +63,12 @@ public class Negozio {
     }
 
 
+    /**
+     * ritorna un ArrayList<Prodotto> temporanea per rispettare l'incapsulamento
+     *
+     * @return ArrayList<Prodotto>
+     * @throws CloneNotSupportedException
+     */
     public ArrayList<Prodotto> ritornaLista() throws CloneNotSupportedException {
         ArrayList<Prodotto> temp = new ArrayList<>(); // ArrayList temporanea per rispettare l'incapsulamento
         for (Prodotto p : prodotti) {

@@ -3,6 +3,11 @@ import java.util.Scanner;
 
 import static utility.Tools.*;
 
+/**
+ * @author Diego Renesto
+ * @version 1.0
+ * @since 31/03/2025
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner tastiera = new Scanner(System.in);
