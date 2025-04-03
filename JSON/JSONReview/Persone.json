@@ -1,0 +1,32 @@
+[
+  {
+    "nome": "Nome1",
+    "cognome": "Cognome1",
+    "eta": 17,
+    "sportivo": true
+  },
+  {
+    "nome": "Nome2",
+    "cognome": "Cognome2",
+    "eta": 18,
+    "sportivo": true
+  },
+  {
+    "nome": "Nome3",
+    "cognome": "Cognome3",
+    "eta": 19,
+    "sportivo": false
+  },
+  {
+    "nome": "Nome4",
+    "cognome": "Cognome4",
+    "eta": 20,
+    "sportivo": true
+  },
+  {
+    "nome": "Nome5",
+    "cognome": "Cognome5",
+    "eta": 21,
+    "sportivo": false
+  }
+]
